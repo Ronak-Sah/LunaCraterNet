@@ -14,8 +14,13 @@ class Model_Trainer:
     def __init__(self,config: ModelTrainerConfig):
         self.config= config
         self.device= "cuda" if torch.cuda.is_available() else "cpu"
-     
-        self.model = YOLO("yolov8s.pt").to(self.device)
+        folder_path=os.path.join(os.getcwd(), "artifacts", "model_trainer")
+        if folder_path.exists():
+            logger.info("Resuming training...")
+            model_path="artifacts\\model_trainer\\runs\\weights\\best.pt"
+            self.model=YOLO(model_path)
+        else:
+            self.model = YOLO("yolov8s.pt").to(self.device)
               
 
     def train(self):
@@ -29,7 +34,8 @@ class Model_Trainer:
                 imgsz=416,
                 device=self.device,
                 fraction=0.5,
-                exist_ok=True
+                exist_ok=True,
+                val=False
             )
 
             # self.model.export(format="engine", 

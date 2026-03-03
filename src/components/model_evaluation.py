@@ -20,6 +20,6 @@ class Model_Evaluation:
             imgsz=416,
             device=self.device,
             fraction=0.1,
-            exist_ok=True
+            exist_ok=True 
         )
         logger.info("Evaluation Completed")
