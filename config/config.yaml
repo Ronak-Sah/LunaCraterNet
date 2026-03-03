@@ -5,3 +5,16 @@ data_ingestion:
   source_url: "https://drive.google.com/uc?id=1pWnN8pRNVW4jyr1xSDsXmqHkWhk3CByd"
   local_data_file: artifacts/data_ingestion/dataset.zip
   unzip_dir : "artifacts/data_ingestion/dataset"
+
+
+model_trainer:
+  root_dir : artifacts/model_trainer
+  train_data_path : artifacts\data_ingestion\dataset\LU3M6TGT_yolo_format\train
+  # val_data_path : artifacts\data_ingestion\dataset\LU3M6TGT_yolo_format\val
+
+model_evaluation:
+  root_dir : artifacts/model_evaluation
+  model_path : artifacts\model_trainer\runs\weights\best.pt
+  data_path : artifacts\data_ingestion\dataset\LU3M6TGT_yolo_format\data.yaml
+
+  

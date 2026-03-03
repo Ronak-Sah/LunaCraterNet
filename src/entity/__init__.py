@@ -9,3 +9,22 @@ class DataIngestionConfig:
     source_url :str
     local_data_file :Path
     unzip_dir :Path
+
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir:Path
+    train_data_path :Path
+    # val_data_path :Path
+    epochs : int
+    batch_size :int
+    
+
+@dataclass(frozen=True)
+class ModelEvalConfig:
+    root_dir:Path
+    data_path :Path
+    model_path : Path
+    batch_size :int
+    
+    

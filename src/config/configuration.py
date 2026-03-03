@@ -1,4 +1,4 @@
-from src.entity import DataIngestionConfig
+from src.entity import DataIngestionConfig,ModelTrainerConfig,ModelEvalConfig
 from src.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.utils.common import read_yaml,create_directories
 
@@ -25,3 +25,32 @@ class ConfigurationManager:
 
         return data_ingestion_config
     
+
+    def get_model_trainer(self) -> ModelTrainerConfig:
+        config = self.config.model_trainer                 # Extracts only the data_ingestion part of config.yaml.
+        params = self.params.model_trainer
+        create_directories([config.root_dir])               # Create data_ingestion.root directory
+
+        model_trainer_config = ModelTrainerConfig(
+            root_dir=config.root_dir,
+            train_data_path=config.train_data_path,
+            epochs= params.epochs,
+            batch_size=params.batch_size
+        )
+
+        return model_trainer_config
+    
+
+    def get_model_evaluation(self) -> ModelEvalConfig:
+        config = self.config.model_evaluation                 # Extracts only the data_ingestion part of config.yaml.
+        params = self.params.model_evaluation
+        create_directories([config.root_dir])               # Create data_ingestion.root directory
+
+        model_eval_config = ModelEvalConfig(
+            root_dir=config.root_dir,
+            data_path=config.data_path,
+            model_path=config.model_path,
+            batch_size=params.batch_size
+        )
+
+        return model_eval_config
