@@ -14,8 +14,8 @@ class DataIngestionConfig:
 @dataclass(frozen=True)
 class ModelTrainerConfig:
     root_dir:Path
-    train_data_path :Path
-    # val_data_path :Path
+    data_path :Path
+    model_path :Path
     epochs : int
     batch_size :int
     

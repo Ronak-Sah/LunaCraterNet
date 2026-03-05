@@ -28,13 +28,14 @@ class ConfigurationManager:
     
 
     def get_model_trainer(self) -> ModelTrainerConfig:
-        config = self.config.model_trainer                 # Extracts only the data_ingestion part of config.yaml.
+        config = self.config.model_trainer                 
         params = self.params.model_trainer
-        create_directories([config.root_dir])               # Create data_ingestion.root directory
+        create_directories([config.root_dir])             
 
         model_trainer_config = ModelTrainerConfig(
             root_dir=config.root_dir,
-            train_data_path=config.train_data_path,
+            data_path=config.data_path,
+            model_path=config.data_path,
             epochs= params.epochs,
             batch_size=params.batch_size
         )
@@ -43,9 +44,9 @@ class ConfigurationManager:
     
 
     def get_model_evaluation(self) -> ModelEvalConfig:
-        config = self.config.model_evaluation                 # Extracts only the data_ingestion part of config.yaml.
+        config = self.config.model_evaluation                 
         params = self.params.model_evaluation
-        create_directories([config.root_dir])               # Create data_ingestion.root directory
+        create_directories([config.root_dir])               
 
         model_eval_config = ModelEvalConfig(
             root_dir=config.root_dir,

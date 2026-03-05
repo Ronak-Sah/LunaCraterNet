@@ -45,6 +45,8 @@ class Embedding:
         self.model = nn.Sequential(*list(backbone.children())[:-1])
 
         self.model.to(self.device)
+
+    
     def run(self):
         
         dataset = CraterDataset(Path(self.config.data_path))
@@ -67,3 +69,19 @@ class Embedding:
         filenames = dataset.crops
         print(all_embeddings.shape)
         return all_embeddings,filenames
+    
+    def embed_single(self,image):
+        self.model.eval()
+        transform = transforms.ToTensor()
+        with torch.no_grad():
+            image = Image.fromarray(image)
+            image = transform(image)
+            image = image.unsqueeze(0) 
+            image = image.to(self.device)
+            print(image.shape)
+            embeddings = self.model(image)          # Shape: (32, 2048, 1, 1)
+            print(embeddings.shape)
+            embeddings = embeddings.view(embeddings.size(0), -1)
+            print(embeddings.shape)
+
+            return embeddings.cpu().numpy()

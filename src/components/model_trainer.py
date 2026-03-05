@@ -12,7 +12,7 @@ from ultralytics.utils.loss import v8DetectionLoss
 
 class Model_Trainer:
     def __init__(self,config: ModelTrainerConfig):
-        self.config= config
+        self.config= config   
         self.device= "cuda" if torch.cuda.is_available() else "cpu"
         folder_path=os.path.join(os.getcwd(), "artifacts", "model_trainer")
         if folder_path.exists():
@@ -38,11 +38,11 @@ class Model_Trainer:
                 val=False
             )
 
-            # self.model.export(format="engine", 
-            #     device=0,
-            #     project="artifacts/modeltrainer",
-            #     name="yolo"
-            # )
+            self.model.export(format="engine", 
+                device=0,
+                project="artifacts/modeltrainer",
+                name="yolo"
+            )
             
             logger.info("Training Complete.")
 

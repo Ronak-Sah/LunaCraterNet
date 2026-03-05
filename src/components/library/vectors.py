@@ -37,20 +37,19 @@ class VectorDb:
         image=cp.crop()
 
         emb=Embedding(self.lib_config)
-        vectors,filenames=emb.run()
-        vectors = vectors.astype(np.float32) 
-
+        vectors=emb.embed_single(image)
+        print("svec",vectors.shape)
+        svec = vectors.astype(np.float32) 
+        print("svec",svec.shape)
         index = faiss.read_index("artifacts\\library\\vectorDB")
 
-        svec = svec.astype(np.float32)
-        svec = np.expand_dims(svec, axis=0)
 
         distance,pos = index.search(svec,k=2)
 
-        filenames = np.load("artifacts/vector_db/filenames.npy")
+        with open(self.lib_config.filenames_path, "r") as f:
+            filenames = json.load(f)
 
         results = [filenames[i] for i in pos[0]]
-
         print(results)
         return results
 
