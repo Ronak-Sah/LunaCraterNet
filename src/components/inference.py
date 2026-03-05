@@ -14,7 +14,14 @@ class Model:
         self.model=YOLO(self.config.model_path)
 
     def predict(self,path:Path):
-        results=self.model(path)
+        results=self.model(path, conf=0.7, iou=0.6,max_det=50)
 
-        for result in results:
-            result.show()
+        # for result in results:
+        #     boxes = result.boxes
+        #     for box in boxes.xyxy:
+        #         x1, y1, x2, y2 = box.tolist()
+        #         print(x1, y1, x2, y2)
+        
+        #     result.show()
+
+        return results

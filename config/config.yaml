@@ -17,4 +17,12 @@ model_evaluation:
   model_path : artifacts\model_trainer\runs\weights\best.pt
   data_path : artifacts\data_ingestion\dataset\LU3M6TGT_yolo_format\data.yaml
 
+
+library:
+  root_dir : artifacts/library
+  data_path : artifacts/crops
+  index_path : artifacts/library/vectorDB
+  filenames_path : artifacts/library/metadata
+  
+
   

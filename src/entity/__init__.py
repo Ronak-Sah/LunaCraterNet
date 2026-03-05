@@ -27,4 +27,10 @@ class ModelEvalConfig:
     model_path : Path
     batch_size :int
     
+@dataclass(frozen=True)
+class LibraryConfig:
+    root_dir:Path
+    data_path :Path
+    filenames_path : Path
+    index_path :Path
     

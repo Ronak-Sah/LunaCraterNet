@@ -1,4 +1,5 @@
-from src.entity import DataIngestionConfig,ModelTrainerConfig,ModelEvalConfig
+from src.entity import DataIngestionConfig,ModelTrainerConfig,ModelEvalConfig,LibraryConfig
+\
 from src.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.utils.common import read_yaml,create_directories
 
@@ -54,3 +55,19 @@ class ConfigurationManager:
         )
 
         return model_eval_config
+    
+
+
+    def get_library_components(self) -> LibraryConfig:
+        config = self.config.library               
+        # params = self.params.model_evaluation
+        create_directories([config.root_dir])               
+
+        lib_config = LibraryConfig(
+            root_dir=config.root_dir,
+            data_path=config.data_path,
+            index_path=config.index_path,
+            filenames_path=config.filenames_path
+        )
+
+        return lib_config
