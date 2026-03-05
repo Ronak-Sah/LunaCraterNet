@@ -32,8 +32,8 @@ class CraterDataset(Dataset):
         if img is None:
             raise ValueError(f"Failed to read image: {full_path}")
 
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR → RGB
-        img = Image.fromarray(img)                   # numpy → PIL
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
+        img = Image.fromarray(img)                 
         return self.transform(img)
 
 class Embedding:
@@ -58,16 +58,13 @@ class Embedding:
         with torch.no_grad():
             for batch in loader:
                 batch = batch.to(self.device)
-                print(batch.shape)
-                embeddings = self.model(batch)          # Shape: (32, 2048, 1, 1)
-                print(embeddings.shape)
+                embeddings = self.model(batch)        
                 embeddings = embeddings.view(embeddings.size(0), -1)
-                print(embeddings.shape)
                 all_embeddings.append(embeddings.cpu().numpy())
     
         all_embeddings = np.concatenate(all_embeddings, axis=0)
         filenames = dataset.crops
-        print(all_embeddings.shape)
+
         return all_embeddings,filenames
     
     def embed_single(self,image):
@@ -78,10 +75,8 @@ class Embedding:
             image = transform(image)
             image = image.unsqueeze(0) 
             image = image.to(self.device)
-            print(image.shape)
-            embeddings = self.model(image)          # Shape: (32, 2048, 1, 1)
-            print(embeddings.shape)
+            embeddings = self.model(image)         
             embeddings = embeddings.view(embeddings.size(0), -1)
-            print(embeddings.shape)
+  
 
             return embeddings.cpu().numpy()

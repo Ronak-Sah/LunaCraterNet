@@ -1,5 +1,4 @@
 from src.entity import DataIngestionConfig,ModelTrainerConfig,ModelEvalConfig,LibraryConfig
-\
 from src.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from src.utils.common import read_yaml,create_directories
 
@@ -35,7 +34,7 @@ class ConfigurationManager:
         model_trainer_config = ModelTrainerConfig(
             root_dir=config.root_dir,
             data_path=config.data_path,
-            model_path=config.data_path,
+            model_path=config.model_path,
             epochs= params.epochs,
             batch_size=params.batch_size
         )
@@ -68,7 +67,8 @@ class ConfigurationManager:
             root_dir=config.root_dir,
             data_path=config.data_path,
             index_path=config.index_path,
-            filenames_path=config.filenames_path
+            filenames_path=config.filenames_path,
+            crop_save_dir=config.crop_save_dir
         )
 
         return lib_config

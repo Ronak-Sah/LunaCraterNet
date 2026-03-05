@@ -33,4 +33,5 @@ class LibraryConfig:
     data_path :Path
     filenames_path : Path
     index_path :Path
+    crop_save_dir :Path
     

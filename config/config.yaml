@@ -12,7 +12,7 @@ model_trainer:
   data_path : artifacts\data_ingestion\dataset\LU3M6TGT_yolo_format\data.yaml
   model_path : artifacts\model_trainer\runs\weights\best.pt
 
-  
+
 model_evaluation:
   root_dir : artifacts/model_evaluation
   model_path : artifacts\model_trainer\runs\weights\best.pt
@@ -24,6 +24,5 @@ library:
   data_path : artifacts/crops
   index_path : artifacts/library/vectorDB
   filenames_path : artifacts/library/metadata
-  
-
+  crop_save_dir : artifacts/crops
   
